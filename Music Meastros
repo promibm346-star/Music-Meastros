@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Music Meastros ZM</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0d0d0d;
+  color: white;
+}
+
+/* HEADER */
+header {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+header h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+header p {
+  color: #ccc;
+}
+
+/* SECTION */
+section {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  color: #ddd;
+  line-height: 1.6;
+}
+
+/* WHATSAPP BUTTON */
+.whatsapp-float {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  background: #25D366;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  text-decoration: none;
+  color: white;
+}
+
+/* CHATBOT */
+.chatbot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.chatbot-icon {
+  width: 60px;
+  height: 60px;
+  background: #ff4d00;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.chat-box {
+  display: none;
+  background: #1a1a1a;
+  padding: 15px;
+  border-radius: 12px;
+  width: 250px;
+  margin-bottom: 10px;
+}
+
+.chat-box input,
+.chat-box textarea,
+.chat-box select {
+  width: 100%;
+  margin-top: 8px;
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+}
+
+.chat-box button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  background: #25D366;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🎶 Music Meastros ZM</h1>
+  <p>Media • Music • Events</p>
+</header>
+
+<section>
+  <h2>About Us</h2>
+  <p>
+    Music Meastros ZM is a modern media and music brand dedicated to capturing and presenting powerful moments through professional photography, videography, and sound production. We specialize in documenting events such as worship gatherings, live performances, conferences, and special occasions with creativity, clarity, and excellence.
+
+    Our mission is to preserve meaningful experiences and transform them into lasting visual and audio memories that inspire and communicate impact. We provide fast communication through WhatsApp for bookings and inquiries, ensuring smooth and direct interaction with clients.
+
+    Music Meastros ZM is built on passion, creativity, and professionalism. We aim to deliver high-quality media services that tell powerful stories and connect people through visual and audio experiences.
+  </p>
+</section>
+
+<!-- WhatsApp Button -->
+<a class="whatsapp-float"
+   href="https://wa.me/260778455601"
+   target="_blank">
+💬
+</a>
+
+<!-- Chatbot -->
+<div class="chatbot-container">
+
+  <div class="chat-box" id="chatBox">
+    <p>👋 Chat with us</p>
+
+    <input type="text" id="name" placeholder="Your Name">
+    <textarea id="message" placeholder="Your message"></textarea>
+
+    <select id="type">
+      <option value="booking">🎤 Booking</option>
+      <option value="media">🎥 Media</option>
+      <option value="general">💬 General</option>
+    </select>
+
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <div class="chatbot-icon" onclick="toggleChat()">
+    🤖
+  </div>
+
+</div>
+
+<script>
+function toggleChat() {
+  const box = document.getElementById("chatBox");
+  box.style.display = box.style.display === "block" ? "none" : "block";
+}
+
+// Replace this after backend deployment
+const API_URL = "http://localhost:3000/api/contact";
+
+async function sendMessage() {
+  const name = document.getElementById("name").value;
+  const message = document.getElementById("message").value;
+  const type = document.getElementById("type").value;
+
+  const res = await fetch(API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, message, type })
+  });
+
+  const data = await res.json();
+  window.open(data.whatsappLink, "_blank");
+}
+</script>
+
+</body>
+</html>
