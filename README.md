@@ -1,0 +1,1 @@
+A modern media and music platform designed for bookings, media services, and event coverage. The system includes a chatbot interface connected to WhatsApp and a Node.js backend for handling client requests efficiently.
